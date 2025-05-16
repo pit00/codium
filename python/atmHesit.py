@@ -1,15 +1,18 @@
-# https://www.codewars.com/kata/5d8108a41e94580023bd6419
+"""https://www.codewars.com/kata/5d8108a41e94580023bd6419"""
+
+
 def maximumThrill(atms: list[int]) -> int:
-    maxThrill = max(atms) * 2
-    
+    """Calc maximum thrill given a integer list"""
+    max_thrill = max(atms) * 2
+
     size = range(len(atms))
     for i in size:
         for j in size:
             calc = atms[i] + atms[j] + abs(i - j)
-            if calc > maxThrill:
-                maxThrill = calc
-    
-    return maxThrill
+            max_thrill = max(max_thrill, calc)
+
+    return max_thrill
+
 
 maximumThrill(atms=[3, 1, 3])
 # 8: $3 + $3 + $2 transferred between each (atms[0] and atms[2])

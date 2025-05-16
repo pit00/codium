@@ -1,5 +1,6 @@
+"""https://rosettacode.org/wiki/15_puzzle_solver"""
+
 import heapq
-from collections import deque
 
 GOAL_STATE = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0)
 
@@ -10,7 +11,9 @@ MOVES = {
     "RIGHT": 1,
 }
 
+
 def manhattan_distance(state):
+    """Manhattan Distance"""
     distance = 0
     for index, value in enumerate(state):
         if value == 0:
@@ -18,10 +21,12 @@ def manhattan_distance(state):
         goal_index = value - 1
         x1, y1 = divmod(index, 4)
         x2, y2 = divmod(goal_index, 4)
-        distance += abs(x1 - x2) + abs(y1 - y2)
+        distance = distance + abs(x1 - x2) + abs(y1 - y2)
     return distance
 
+
 def get_neighbors(state):
+    """Get Neighbors"""
     neighbors = []
     zero_index = state.index(0)
 
@@ -47,7 +52,9 @@ def get_neighbors(state):
 
     return neighbors
 
+
 def solve(start_state):
+    """Solve"""
     heap = []
     heapq.heappush(heap, (manhattan_distance(start_state), 0, start_state, []))
     visited = set()
@@ -72,6 +79,7 @@ def solve(start_state):
 
     return None
 
+
 if __name__ == "__main__":
     start = (15, 14, 1, 6, 9, 11, 4, 12, 0, 10, 7, 3, 13, 8, 5, 2)
     # start = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 13, 14, 0)
@@ -81,12 +89,6 @@ if __name__ == "__main__":
 
     if solution:
         # print(solution)
-        mapping = {
-            'RIGHT': 'r',
-            'UP': 'u',
-            'LEFT': 'l',
-            'DOWN': 'd'
-        }
+        mapping = {"RIGHT": "r", "UP": "u", "LEFT": "l", "DOWN": "d"}
         print(f"Steps: {len(solution)}")
-        out = ''.join(mapping[move] for move in solution)
-        print("Solution: " + out)
+        print("Solution: " + "".join(mapping[move] for move in solution))
