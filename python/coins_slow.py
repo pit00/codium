@@ -2,29 +2,6 @@
 
 from itertools import combinations_with_replacement
 
-
-def solver(goal) -> int:
-    """Combinations of money to sum the goal (dynamic)"""
-    coins = [1, 2, 5, 10, 20, 50, 100, 200]
-    ways = [0] * (goal + 1)  # list of 0
-    ways[0] = 1
-
-    for coin in coins:
-        for i in range(coin, goal + 1):
-            ways[i]+=ways[i - coin]
-
-    return ways[goal]
-
-
-solver(5)  # 4
-solver(10)  # 11
-solver(17)  # 28
-solver(25)  # 68
-solver(50)  # 451
-solver(100)  # 4563
-solver(200)  # 73682
-
-
 def slowver(goal) -> int:
     """Combinations of money to sum the goal"""
     coins = [1, 2, 5, 10, 20, 50, 100, 200]
